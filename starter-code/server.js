@@ -1,6 +1,9 @@
 'use strict';
 
-// TODO: Install and require the NPM Postgres package 'pg' into your server.js, and ensure that it is then listed as a dependency in your package.json
+// done: Install and require the NPM Postgres package 'pg' into your server.js,
+// and ensure that it is then listed as a dependency in your package.json
+const pg = require('pg');
+
 const fs = require('fs');
 const express = require('express');
 
@@ -9,17 +12,18 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-// TODO: Complete the connection string for the url that will connect to your local postgres database
+// done: Complete the connection string for the url that will connect to your local postgres database
 // Windows and Linux users; You should have retained the user/pw from the pre-work for this course.
 // Your url may require that it's composed of additional information including user and password
-// const conString = 'postgres://USER:PASSWORD@HOST:PORT/DBNAME';
-const conString = 'postgres://localhost:5432';
+const conString = 'postgres://kernamx:Tableofcont1@HOST:5432/kilovolt';
 
-// TODO: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
+// const conString = 'postgres://localhost:5432';
+
+// done: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 //       This is how it knows the URL and, for Windows and Linux users, our username and password for our
 //       database when client.connect is called on line 25. Thus, we need to pass our conString into our
 //       pg.Client() call.
-const client = new pg.Client('something needs to go here... read the instructions above!');
+const client = new pg.Client(conString);
 
 // REVIEW: Use the client object to connect to our DB.
 client.connect();
@@ -33,16 +37,20 @@ app.use(express.static('./public'));
 
 // REVIEW: Routes for requesting HTML resources
 app.get('/new', function(request, response) {
-  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here...
+  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code?
+  // Which method of article.js is interacting with this particular piece of `server.js`?
+  // What part of CRUD is being enacted/managed by this particular piece of code?
+  // Put your response here...#5, the method of article.js is interacting with this piece of server.js is Article.fetchAll() method, Read
   response.sendFile('new.html', {root: './public'});
 });
 
 
 // REVIEW: Routes for making API calls to use CRUD Operations on our database
 app.get('/articles', function(request, response) {
-  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here...
+  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code?
+  // Which method of article.js is interacting with this particular piece of `server.js`?
+  // What part of CRUD is being enacted/managed by this particular piece of code?
+  // Put your response here...#3, 4, 5; ; read and update;
   client.query('SELECT * FROM articles')
   .then(function(result) {
     response.send(result.rows);
@@ -53,7 +61,9 @@ app.get('/articles', function(request, response) {
 });
 
 app.post('/articles', function(request, response) {
-  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code?
+  // Which method of article.js is interacting with this particular piece of `server.js`?
+  // What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
   client.query(
     `INSERT INTO
