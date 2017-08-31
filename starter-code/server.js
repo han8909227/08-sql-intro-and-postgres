@@ -16,7 +16,7 @@ const app = express();
 // DONE: Complete the connection string for the url that will connect to your local postgres database
 // Windows and Linux users; You should have retained the user/pw from the pre-work for this course.
 // Your url may require that it's composed of additional information including user and password
-const conString = 'postgres://postgres:postgres@localhost:5432/killovolt';
+const conString = 'postgres://postgres:postgres@localhost:5432/kilovolt';
 // const conString = 'postgres://localhost:5432';
 
 // DONE: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
@@ -39,8 +39,7 @@ app.use(express.static('./public'));
 app.get('/new', function(request, response) {
 
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here: On diagram this is 2 => 5 => 1. Interacting with Article.fetchALl() as it creates the form. Read in CRUD.
-
+  // Put your response here: On diagram this is number 5. Interacting with Article.fetchALl() as it creates the form. Read in CRUD.
   response.sendFile('new.html', {root: './public'});
 });
 
@@ -49,8 +48,7 @@ app.get('/new', function(request, response) {
 app.get('/articles', function(request, response) {
 
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here: On diagram this is 2 => 3 => 4 => 5 =>1. Interacting with Article.insertRecord. Read, update in CRUD.
-
+  // Put your response here: On diagram this is 3. Interacting with Article.fetchALl. Read, update in CRUD.
   client.query('SELECT * FROM articles')
   .then(function(result) {
     response.send(result.rows);
@@ -136,8 +134,7 @@ app.delete('/articles/:id', function(request, response) {
 app.delete('/articles', function(request, response) {
 
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here: On diagram it is 3. interacting with Article.deleteRecord(). Delect in CRUD.
-
+  // Put your response here: On diagram it is 3. interacting with Article.truncateTable(). Delect in CRUD.
   client.query(
     'DELETE FROM articles;'
   )
